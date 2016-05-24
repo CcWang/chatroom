@@ -14,3 +14,9 @@ var server = app.listen(8899,function () {
 	// body...
 	console.log('listening on 8899 for chatroom');
 })
+
+var io = require('socket.io').listen(server);
+io.sockets.on('connection',function(socket){
+	console.log('socket'+socket.id + 'is connected');
+
+})
