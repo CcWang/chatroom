@@ -1,5 +1,2 @@
-#Dependency directory
+# Dependency directories
 node_modules
-
-#api_key
-.env
