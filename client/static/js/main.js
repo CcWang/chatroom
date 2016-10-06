@@ -1,11 +1,29 @@
 console.log('hello');
-var myApp = angular.module('myApp',[]);
+var myApp = angular.module('myApp',["ngRoute"]);
+myApp.config(function ($routeProvider){
+	$routeProvider
+		.when('/welcome', {
+			templateUrl:'/static/partials/welcome.html'
+		})
+		.when('/products',{
+			templateUrl: '/static/partials/products.html'
+		})
+		.when('/orders',{
+			templateUrl:'/static/partials/orders.html'
+		})
+		.when('/customers',{
+			templateUrl:'/static/partials/customers.html'
+		})
+		.otherwise({
+			redirectTo:'/welcome'
+		});
+});
 myApp.factory('socket', function () {
 	// body...
 	var socket = io.connect('http://localhost:8899');
 	socket.on('connetc',function(){
 		console.log('socket created');
-		
+
 	})
 	console.log('factory');
 	return socket;

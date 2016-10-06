@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head ng-app='myApp'>
-  <title>Chat room</title>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src='/static/js/main.js'></script>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title>Chat Room</title>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script> -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src='/static/js/master.js'></script>
+    <link rel="stylesheet" href="/static/master.css" media="screen" title="no title">
+  </head>
+  <body>
+    <div id='logIn'>
+      <h1>Welcome!</h1>
+      <h2>What is your nick name?</h2>
+      <input type="text" name="name" placeholder="type your name...." id='name'><br>
+      <button type="button" name="button" id='enterRoom'>Enter</button>
+    </div>
+    <div id='chatPage'>
+      <div class="messages">
 
-</head>
-<body ng-controller='ChatController'>
-<h1>Hello welcome to chatroom 1.0</h1>
-<button id="enter">Enter Room</button>
-<div id="user_list">
-
-</div>
-<p></p>
-</body>
+        <ul id='messages'></ul>
+        <form class="sendM" action="" >
+          <input id='m' autocomplete="off">
+          <button type="button" id='myButton' >Send</button>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
