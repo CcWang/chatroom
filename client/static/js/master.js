@@ -4,6 +4,7 @@ $(document).ready(function(){
   var chat = document.getElementById('chatPage');
   // initial status
   var logStatus = false;
+  var socket = io.connect('http://localhost:8899');
   var displayCheck =function(){
     if (logStatus){
       chat.style.display='initial';
@@ -34,6 +35,27 @@ $(document).ready(function(){
     var user = $('#name').val();
     logStatus=true;
     displayCheck();
+    socket.emit('new_user',{name:user});
   });
+  socket.on('users',function(data){
+    var list='<ul id="list"> <h3>User lists </h3>';
+    for(var i=0;i<data.all_user.length;i++){
+      for(var key in data.all_user[i]){
+        list += '<li>'+data.all_user[i][key]+'</li>';
+      }
+    }
+    list+='</ul>'
+    $('.nameList').html(list);
+  })
+  socket.on('new_user',function(data){
+    var welcome = '';
+    for(var key in data.new_user){
+      welcome+=data.new_user[key]+' has joined the room.';
+      var list = '<li>'+data.new_user[key]+'</li>';
+    }
+    alert(welcome);
+    $('#list').append(list);
+  })
+
 
 });

@@ -1,23 +1,6 @@
 console.log('hello');
-var myApp = angular.module('myApp',["ngRoute"]);
-myApp.config(function ($routeProvider){
-	$routeProvider
-		.when('/welcome', {
-			templateUrl:'/static/partials/welcome.html'
-		})
-		.when('/products',{
-			templateUrl: '/static/partials/products.html'
-		})
-		.when('/orders',{
-			templateUrl:'/static/partials/orders.html'
-		})
-		.when('/customers',{
-			templateUrl:'/static/partials/customers.html'
-		})
-		.otherwise({
-			redirectTo:'/welcome'
-		});
-});
+var myApp = angular.module('myApp',[]);
+
 myApp.factory('socket', function () {
 	// body...
 	var socket = io.connect('http://localhost:8899');

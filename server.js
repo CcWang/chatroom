@@ -28,9 +28,10 @@ io.sockets.on('connection',function(socket){
 	});
 	//disconnect
 	socket.on('disconnect',function(){
-		// var i = all_user.indexOf(socket.id);
-		// all_user.splice(i,1);
-		io.emit(console.log('by'));
+		var i = users.indexOf(socket.id);
+		users.splice(i,1);
+		console.log(i);
+		io.emit(console.log('bye'));
 	})
 
 })
