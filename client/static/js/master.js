@@ -29,6 +29,16 @@ $(document).ready(function(){
       })
     }
   }
+  var makeUserList = function(data){
+    var list='<ul id="list"> <h3>User lists </h3>';
+    for(var i=0;i<data.length;i++){
+      for(var key in data[i]){
+        list += '<li>'+data[i][key]+'</li>';
+      }
+    }
+    list+='</ul>'
+    $('.nameList').html(list);
+  }
   displayCheck();
   enterFunction();
   $('#enterRoom').click(function(){
@@ -38,14 +48,7 @@ $(document).ready(function(){
     socket.emit('new_user',{name:user});
   });
   socket.on('users',function(data){
-    var list='<ul id="list"> <h3>User lists </h3>';
-    for(var i=0;i<data.all_user.length;i++){
-      for(var key in data.all_user[i]){
-        list += '<li>'+data.all_user[i][key]+'</li>';
-      }
-    }
-    list+='</ul>'
-    $('.nameList').html(list);
+    makeUserList(data.all_user);
   })
   socket.on('new_user',function(data){
     var welcome = '';
@@ -57,5 +60,11 @@ $(document).ready(function(){
     $('#list').append(list);
   })
 
-
+  socket.on('user_disconnet',function(data){
+    if(data){
+      var left ='User '+data['left'] +' just left the room';
+      makeUserList(data['all_user']);
+      alert(left);
+    }
+  })
 });

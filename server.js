@@ -28,10 +28,18 @@ io.sockets.on('connection',function(socket){
 	});
 	//disconnect
 	socket.on('disconnect',function(){
-		var i = users.indexOf(socket.id);
-		users.splice(i,1);
-		console.log(i);
-		io.emit(console.log('bye'));
+		var leftUser;
+		for(var i=0;i<users.length;i++){
+			for(var key in users[i]){
+				if (key == socket.id){
+					leftUser=users[i][key];
+					users.splice(i,1);
+					io.emit('user_disconnet',{'left':leftUser,'all_user':users});
+					// console.log(leftUser);
+					break;
+				}
+			}
+		}
 	})
 
 })
